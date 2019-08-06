@@ -6,12 +6,20 @@ import java.util.Scanner;
 
 public class Calculator
 {
-    public void calculate()
-
+    /**
+     * Takes a mathematical expression as input and returns the result.
+     *
+     * @param input the expression; must not be null
+     */
+    public double calculate(String input)
     {
-        Scanner scanner = new Scanner(System.in);
+        Scanner scanner = new Scanner(input);
         System.out.println("Welcome to the ultimate calculator! What would you like to calculate?");
         System.out.println("a = basic arithmetic expressions");
+        if (!scanner.hasNext())
+        {
+            throw new IllegalArgumentException("Expression cannot be null");
+        }
         String determinate = scanner.next();
 
         if (determinate.toLowerCase().equals("a"))
@@ -62,19 +70,11 @@ public class Calculator
                 else
                 {
                     System.out.println("Syntax Error");
-                    return;
+                    return Double.NaN;
                 }
             }
-            System.out.println(a);
-
-            try
-            {
-                a /= 0;
-            }
-            catch (Exception e)
-            {
-                System.out.println("Oops, there was a error, you goof!");
-            }
+            return a;
         }
+        return 0.0;
     }
 }
